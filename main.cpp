@@ -135,8 +135,18 @@ string decodeMorseToText(string morseCode) {
     return text;
 }
 
-int main() {
-    string filename = "Feel.wav";
+int main(int argc, char** argv) {
+    string filename;
+    if (argc > 1) {
+        filename = argv[1];
+    } else {
+        std::cout << "No filename" << std::endl;
+    }
+    ifstream file(filename);
+    if (!file) {
+        cout << "File is missing" << std::endl;
+        return 1;
+    }
     vector<float> samples = readWavFile(filename);
 
     string morseCode = decodeMorseCode(samples);
